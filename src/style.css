@@ -4,7 +4,16 @@
   height: 70%;
   left: 25%;
   top: 10%;
-  background-image: url("https://www.pngkey.com/png/full/293-2935109_they-dont-want-to-burst-your-balloon-they.png");
+  border-radius: 30%;
+  /* background-image: url("https://www.pngkey.com/png/full/293-2935109_they-dont-want-to-burst-your-balloon-they.png"); */
 
-  background-color: #0b2434;
+  background-color: red;
+}
+
+.Menu-title {
+  position: absolute;
+  font-family: monospace;
+  left: 35%;
+  color: blue;
+  font-size: 300%;
 }
