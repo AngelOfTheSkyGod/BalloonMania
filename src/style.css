@@ -1,0 +1,9 @@
+.Menu-background {
+  position: absolute;
+  width: 48rem;
+  height: 50rem;
+  left: 60rem;
+  top: 10rem;
+
+  background: #0b2434;
+}
