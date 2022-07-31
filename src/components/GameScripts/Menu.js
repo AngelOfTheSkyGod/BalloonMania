@@ -1,14 +1,13 @@
 import React from "react";
 import { useSpring, animated } from "react-spring";
-
-//import MenuList from "/components/MenuComponents/MenuList";
+import MenuItems from "../MenuComponents/MenuItems";
 export default function Menu(props) {
   const page = (
-    <div className="Menu-background">
-      <h1 className="Menu-title">Balloon Pop Mania</h1>
-      {/* <MenuList /> */}
+    <div className="menu-container">
+      <div className="menu-background">
+        <MenuItems props={props} />
+      </div>
     </div>
   );
-  console.log("called menu");
   return page;
 }
