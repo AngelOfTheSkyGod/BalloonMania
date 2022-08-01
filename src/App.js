@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./components/GameScripts/Menu";
-import SinglePlayer from "./components/GameScripts/SinglePlayer";
+import SinglePlayer from "./components/GameScripts/SinglePlayer.js";
 import style from "./style.css";
 
 export default function App() {
