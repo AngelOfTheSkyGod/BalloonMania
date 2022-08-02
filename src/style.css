@@ -17,7 +17,7 @@
 .menu-background {
   height: 100%;
   width: 60%;
-  background-color: lightblue;
+  background-color: #bde0fe;
   box-sizing: border-box;
   border-radius: 3%;
   border-color: black;
@@ -25,15 +25,17 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  padding-left: 3%;
-  padding-right: 3%;
+  padding-left: 1%;
+  padding-right: 1%;
   padding-top: 5%;
   padding-bottom: 5%;
   overflow: auto;
+
+  border: 0.5rem solid white;
+  border-style: solid;
 }
 .display-navbar {
   position: relative;
-  list-style-type: none;
   margin: 0;
   padding: 0;
   width: 100%;
@@ -59,13 +61,71 @@
   font-weight: 400;
   text-align: center;
   font-size: 1.3rem;
+  color: #003f7a;
   white-space: nowrap;
   text-decoration: underline;
   box-sizing: border-box;
   display: inline-block;
 }
 .game-title {
+  width: 100%;
   text-align: center;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #0077b6;
+  box-sizing: border-box;
+  display: inline-block;
+}
+
+.title-navbar {
+  position: relative;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 10%;
+  box-sizing: border-box;
+  list-style-type: none;
+  display: flex;
+  justify-content: center;
+  gap: 50%;
+}
+.navbar-selection {
+  box-sizing: border-box;
+  width: 100%;
+}
+.selection-navbar {
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  gap: 2rem;
+}
+
+.selection-title {
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #0077b6;
+}
+
+.selection-container {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  top: 2rem;
+  left: -25%;
+  gap: 13%;
+}
+
+.selection-container:hover {
+  border-radius: 5%;
+  background-color: #48cae4;
+  left: 0%;
 }
 /* DEVICE RESPONSIVE MANAGER */
 /* even smaller phones */
@@ -97,4 +157,21 @@
   :root {
     font-size: 1.5vh;
   }
+}
+
+@keyframes menuBalloonAnimation {
+  0% {
+    transform: translateY(0.2%) scaleX(95%);
+  }
+  100% {
+    transform: translateY(4%) scaleX(100%);
+  }
+}
+
+.menu-balloon {
+  position: absolute;
+  width: 25%;
+  height: 20%;
+  top: 0.2%;
+  animation: menuBalloonAnimation 1s ease-out forwards infinite alternate;
 }

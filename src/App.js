@@ -10,7 +10,7 @@ export default function App() {
   const [highScore, setHighScore] = React.useState(0);
 
   const page =
-    (mode == "Menu" && (
+    (mode === "Menu" && (
       <Menu
         mode={mode}
         setMode={setMode}
@@ -22,7 +22,7 @@ export default function App() {
         sethighScore={setHighScore}
       />
     )) ||
-    (mode == "SinglePlayer" && (
+    (mode === "SinglePlayer" && (
       <SinglePlayer
         mode={mode}
         setMode={setMode}
