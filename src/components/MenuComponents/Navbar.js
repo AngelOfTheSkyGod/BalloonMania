@@ -10,7 +10,7 @@ function updateMode(mode, setMode, cooldown, setShowMenu) {
   setShowMenu(false);
   setTimeout(() => {
     setMode(mode);
-  }, "1000");
+  }, "10000");
   cooldown.current = true;
 }
 

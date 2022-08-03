@@ -1,11 +1,11 @@
 export default [
   {
-    animation: "button-transition 2s ease-out forwards",
+    animation: "button-transition .3s ease-out forwards",
   },
   {
-    animation: "menu-button-click 1s ease-out 1s forwards",
+    animation: "menu-button-click .5s ease-out .5s forwards",
   },
   {
-    animation: "balloon-transition 1s",
+    animation: "balloon-transition .75s ease-out 0s alternate 0 forwards",
   },
 ];
