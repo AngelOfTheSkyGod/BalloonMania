@@ -8,13 +8,13 @@ export default function Menu(props) {
   const page = (
     <div
       className="menu-container"
-      style={props.showMenu == false ? Animation[1] : {}}
+      style={props.showMenu.activated === false ? Animation[1] : {}}
     >
       <div className="menu-background">
         <GiAirBalloon
           className="menu-balloon"
           color="#003f7a"
-          style={props.showMenu == false ? Animation[2] : {}}
+          style={props.showMenu.activated === false ? Animation[2] : {}}
         />
         <MenuItems props={props} />
       </div>

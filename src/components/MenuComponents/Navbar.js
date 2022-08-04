@@ -7,20 +7,24 @@ function updateMode(mode, setMode, cooldown, setShowMenu) {
   if (cooldown.current) {
     return;
   }
-  setShowMenu(false);
+  setShowMenu({ activated: false, clicked: mode });
   setTimeout(() => {
     setMode(mode);
-  }, "10000");
+  }, "1000");
   cooldown.current = true;
 }
 
 export default function Navbar(props) {
-  console.log("mode shown: " + props.props.mode + props.props.showMenu);
   return (
     <nav className="navbar-selection">
       <ul className="selection-navbar">
         <li
-          style={props.props.showMenu == false ? Animation[0] : {}}
+          style={
+            props.props.showMenu.activated === false &&
+            props.props.showMenu.clicked === "Single Player"
+              ? Animation[0]
+              : {}
+          }
           className="selection-container"
           role="button"
           onClick={() =>
@@ -40,10 +44,21 @@ export default function Navbar(props) {
           <h1 className="selection-title">Single Player</h1>
         </li>
         <li
+          style={
+            props.props.showMenu.activated === false &&
+            props.props.showMenu.clicked === "Shop"
+              ? Animation[0]
+              : {}
+          }
           className="selection-container"
           role="button"
           onClick={() =>
-            updateMode("Shop", props.props.setMode, props.props.menuCooldown)
+            updateMode(
+              "Shop",
+              props.props.setMode,
+              props.props.menuCooldown,
+              props.props.setShowMenu
+            )
           }
         >
           <FaMoneyBillAlt
@@ -54,13 +69,20 @@ export default function Navbar(props) {
           <h1 className="selection-title">Shop</h1>
         </li>
         <li
+          style={
+            props.props.showMenu.activated === false &&
+            props.props.showMenu.clicked === "Settings"
+              ? Animation[0]
+              : {}
+          }
           className="selection-container"
           role="button"
           onClick={() =>
             updateMode(
               "Settings",
               props.props.setMode,
-              props.props.menuCooldown
+              props.props.menuCooldown,
+              props.props.setShowMenu
             )
           }
         >

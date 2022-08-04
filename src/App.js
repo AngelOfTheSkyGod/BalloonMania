@@ -5,7 +5,10 @@ import style from "./style.css";
 
 export default function App() {
   const [mode, setMode] = React.useState("Menu");
-  const [showMenu, setShowMenu] = React.useState(true);
+  const [showMenu, setShowMenu] = React.useState({
+    activated: true,
+    clicked: "",
+  });
   const [points, setPoints] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [highScore, setHighScore] = React.useState(0);
