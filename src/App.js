@@ -1,6 +1,8 @@
 import React from "react";
 import Menu from "./components/GameScripts/Menu";
 import SinglePlayer from "./components/GameScripts/SinglePlayer.js";
+
+import { makeGrid, floatUp } from "./components/GameScripts/Grid";
 import style from "./style.css";
 
 export default function App() {
@@ -12,6 +14,13 @@ export default function App() {
   const [points, setPoints] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [highScore, setHighScore] = React.useState(0);
+
+  const [game, setGame] = React.useState({
+    history: [
+      { board: makeGrid([], 7, 7), points: 0, time: 30000, rows: 7, cols: 7 },
+    ],
+    currentBoard: 0,
+  });
 
   const menuCooldown = React.useRef(false);
 
@@ -33,7 +42,7 @@ export default function App() {
       />
     )) ||
     (mode === "Single Player" && (
-      <Menu
+      <SinglePlayer
         mode={mode}
         setMode={setMode}
         points={points}
