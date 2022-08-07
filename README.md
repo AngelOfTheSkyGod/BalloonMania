@@ -1,4 +1,12 @@
 # Getting Started with Create React App
+PROJECT MADE BY Angel Quinones during the summer of 2022. 
+This is my leap into React.js and mastering CSS/HTML elements. 
+
+
+the game will be a board game that works on recursive clusters that pop if they're the same color. 
+you'll click on a balloon to activate this, it'll have a single player and a shop option to buy cool
+abilities/aesthetics. The project will feature animations to its components.
+
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
