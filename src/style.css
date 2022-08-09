@@ -131,6 +131,106 @@
   background: transparent;
   border: none;
 }
+
+.menu-balloon {
+  position: absolute;
+  width: 25%;
+  height: 20%;
+  top: 0.2%;
+  animation: menuBalloonAnimation 1s ease-out forwards infinite alternate;
+}
+
+.SP-Background {
+  box-sizing: border-box;
+  overflow-y: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* justify-content: center; */
+  gap: 20%;
+  height: 100vh;
+}
+
+.stats-navbar {
+  /* display: flex;
+  flex-direction: column; */
+  list-style-type: none;
+  padding-left: 2%;
+  width: 8%;
+  /* height: 25vh; */
+  gap: 0%;
+}
+.points-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* justify-content: center; */
+  list-style-type: none;
+  box-sizing: border-box;
+}
+.points-display {
+  background-color: #22aed1;
+  display: flex;
+  width: 100%;
+  height: 15vh;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* justify-content: center; */
+  list-style-type: none;
+  box-sizing: border-box;
+  border-radius: 25%;
+  border: 0.2rem solid #95d9c3;
+}
+
+.points-title {
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #a7fff6;
+}
+.points-data {
+  text-align: center;
+  font-size: 2rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  color: #a7fff6;
+}
+.points-balloon {
+  height: 5vh;
+  width: 50%;
+}
+
+.balloon-board {
+  position: relative;
+  display: grid;
+  /* justify-items: center;
+  align-items: center; */
+  /* background-color: #003f7a; */
+  grid-template-columns: repeat(7, 1fr);
+  border-radius: 1%;
+  height: 75vh;
+  width: 50%;
+  border: 0.4rem solid rgba(82, 150, 165, 0.4);
+  animation: points-balloon-float 1s ease-out forwards;
+}
+.balloon-img {
+  width: 100%;
+  color: #22aed1;
+}
+.Balloon {
+  box-sizing: border-box;
+  background-color: rgba(199, 227, 225, 0.25);
+  display: flex;
+  align-items: center;
+  align-content: center;
+  padding-left: 20%;
+
+  border: 0.2rem solid rgba(82, 150, 165, 0.4);
+}
 /* DEVICE RESPONSIVE MANAGER */
 /* even smaller phones */
 @media only screen and (max-width: 359px) {
@@ -172,14 +272,6 @@
   }
 }
 
-.menu-balloon {
-  position: absolute;
-  width: 25%;
-  height: 20%;
-  top: 0.2%;
-  animation: menuBalloonAnimation 1s ease-out forwards infinite alternate;
-}
-
 @keyframes button-transition {
   0% {
     transform: translateX(0%);
@@ -206,5 +298,17 @@
   }
   100% {
     transform: translateY(100%);
+  }
+}
+
+@keyframes points-balloon-float {
+  0% {
+    transform: translateX(-10%) translateY(100vh);
+  }
+  50% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%);
   }
 }

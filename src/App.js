@@ -1,6 +1,6 @@
 import React from "react";
 import Menu from "./components/GameScripts/Menu";
-import SinglePlayer from "./components/GameScripts/SinglePlayer.js";
+import SinglePlayer from "./components/GameScripts/SinglePlayer";
 
 import {
   makeGrid,
@@ -10,6 +10,7 @@ import {
 } from "./components/GameScripts/Grid";
 import style from "./style.css";
 let coordinate = { row: -1, col: -1 };
+
 export default function App() {
   const [mode, setMode] = React.useState("Menu");
   const [showMenu, setShowMenu] = React.useState({
@@ -19,6 +20,8 @@ export default function App() {
   const [points, setPoints] = React.useState(0);
   const [score, setScore] = React.useState(0);
   const [highScore, setHighScore] = React.useState(0);
+
+  const menuCooldown = React.useRef(false);
 
   const [game, setGame] = React.useState({
     history: [
@@ -33,10 +36,59 @@ export default function App() {
     ],
     currentBoard: 0,
   });
+  ///////////////////////////////////////////////////Single Player
+  const [time, setTime] = React.useState(180000);
+  const [combo, setCombo] = React.useState(0);
+  const loadedSinglePlayer = React.useRef(false);
+  const [showSinglePlayer, setShowSinglePlayer] = React.useState({
+    activated: true,
+    clicked: "",
+  });
+  ///////////////////////////////////////////////////Single Player
+  return (
+    (mode === "Menu" && (
+      <Menu
+        mode={mode}
+        setMode={setMode}
+        points={points}
+        setPoints={setPoints}
+        score={score}
+        setScore={setScore}
+        highScore={highScore}
+        sethighScore={setHighScore}
+        menuCooldown={menuCooldown}
+        showMenu={showMenu}
+        setShowMenu={setShowMenu}
+      />
+    )) ||
+    (mode === "Single Player" && (
+      <SinglePlayer
+        mode={mode}
+        setMode={setMode}
+        points={points}
+        setPoints={setPoints}
+        score={score}
+        setScore={setScore}
+        highScore={highScore}
+        sethighScore={setHighScore}
+        menuCooldown={menuCooldown}
+        game={game}
+        setGame={setGame}
+        time={time}
+        setTime={setTime}
+        combo={combo}
+        setCombo={setCombo}
+        loadedSinglePlayer={loadedSinglePlayer}
+        showSinglePlayer={showSinglePlayer}
+        setShowSinglePlayer={setShowSinglePlayer}
+      />
+    ))
+  );
+}
 
-  const menuCooldown = React.useRef(false);
-
-  // (gameObject, row, col)
+//TOY PROGRAM FOR TESTING GRID.JS
+/*
+ // (gameObject, row, col)
   React.useEffect(() => {
     function keyListener(event) {
       if (!isNaN(event.key) && coordinate.col === -1) {
@@ -79,37 +131,4 @@ export default function App() {
       document.removeEventListener("keypress", keyListener);
     };
   }, []);
-  //
-  return (
-    (mode === "Menu" && (
-      <Menu
-        mode={mode}
-        setMode={setMode}
-        points={points}
-        setPoints={setPoints}
-        score={score}
-        setScore={setScore}
-        highScore={highScore}
-        sethighScore={setHighScore}
-        menuCooldown={menuCooldown}
-        showMenu={showMenu}
-        setShowMenu={setShowMenu}
-      />
-    )) ||
-    (mode === "Single Player" && (
-      <SinglePlayer
-        mode={mode}
-        setMode={setMode}
-        points={points}
-        setPoints={setPoints}
-        score={score}
-        setScore={setScore}
-        highScore={highScore}
-        sethighScore={setHighScore}
-        menuCooldown={menuCooldown}
-        showMenu={showMenu}
-        setShowMenu={setShowMenu}
-      />
-    ))
-  );
-}
+*/

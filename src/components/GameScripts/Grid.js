@@ -141,7 +141,7 @@ export function popBalloon(gameObject, row, col) {
   let balloonsPopped = rPop(gameObject, row, col, { r: row, c: col }, 0);
 
   console.log(`popped: ${balloonsPopped} balloons!`);
-
+  board.board = floatUp(board.board, board.rows, board.cols);
   console.log(
     `board after: \n${printMatrix(board.board, board.rows, board.cols)}`
   );
