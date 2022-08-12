@@ -231,6 +231,13 @@
 
   border: 0.2rem solid rgba(82, 150, 165, 0.4);
 }
+
+.Balloon:hover {
+  /* grid-column: 1 / span 2; */
+  /* grid-row: 1/2; */
+  padding-left: 20%;
+  padding-bottom: 50%;
+}
 /* DEVICE RESPONSIVE MANAGER */
 /* even smaller phones */
 @media only screen and (max-width: 359px) {
@@ -263,6 +270,14 @@
   }
 }
 
+@keyframes balloon-hover {
+  0% {
+    transform: translateY(-3%) scaleX(-5%);
+  }
+  100% {
+    transform: translateY(-5%) scaleX(2%);
+  }
+}
 @keyframes menuBalloonAnimation {
   0% {
     transform: translateY(-5%) scaleX(95%);

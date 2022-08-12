@@ -10,8 +10,18 @@ import {
 } from "./components/GameScripts/Grid";
 import style from "./style.css";
 let coordinate = { row: -1, col: -1 };
+function updatePoints(pointsGained, setScore) {
+  setScore((prevScore) => {
+    return pointsGained;
+  });
+}
+
+function updateCombo(balloonsPopped, setCombo) {
+  setCombo(balloonsPopped);
+}
 
 export default function App() {
+  console.log("Rerendered");
   const [mode, setMode] = React.useState("Menu");
   const [showMenu, setShowMenu] = React.useState({
     activated: true,
@@ -45,6 +55,11 @@ export default function App() {
     clicked: "",
   });
   ///////////////////////////////////////////////////Single Player
+  React.useEffect(() => {
+    updatePoints(game.history[game.currentBoard].points, setScore);
+    updateCombo(game.history[game.currentBoard].popped, setCombo);
+  }, [game]);
+
   return (
     (mode === "Menu" && (
       <Menu
