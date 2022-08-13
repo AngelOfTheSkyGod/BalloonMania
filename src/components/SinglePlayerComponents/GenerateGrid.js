@@ -18,9 +18,12 @@ const colors = {
   "*": { opacity: "0%", color: "blue" },
 };
 
-function onClick(row, column, game, setGame) {
+function onClick(row, column, game, setGame, popCooldown) {
+  if (popCooldown.current) {
+    return;
+  }
   console.log(`popped: (${row}, ${column})`);
-  popBalloon(game, row, column, setGame);
+  popBalloon(game, row, column, setGame, popCooldown);
 }
 export default function GenerateGrid(props) {
   console.log("current version: ", props.props.game.currentBoard);
@@ -39,7 +42,8 @@ export default function GenerateGrid(props) {
                 balloon.row,
                 balloon.col,
                 props.props.game,
-                props.props.setGame
+                props.props.setGame,
+                props.props.popCooldown
               )
             }
           >

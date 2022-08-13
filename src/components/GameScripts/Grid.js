@@ -92,126 +92,101 @@ function outOfBounds(gameObject, row, col) {
   return false;
 }
 
-function rPop(gameObject, row, col, prevBalloon, popped, setGame) {
+async function ExecutePop(row, prevBalloon, gameObject, setGame, col, info) {
+  const board = gameObject.history[gameObject.currentBoard].board;
+  console.log("CALLING EXECUTE POP!");
+  if (row - 1 !== prevBalloon.r) {
+    await rPop(gameObject, row - 1, col, { r: row, c: col }, setGame, info);
+  }
+  if (row + 1 !== prevBalloon.r) {
+    await rPop(gameObject, row + 1, col, { r: row, c: col }, setGame, info);
+  }
+  if (col - 1 !== prevBalloon.c) {
+    await rPop(gameObject, row, col - 1, { r: row, c: col }, setGame, info);
+  }
+  if (col + 1 !== prevBalloon.c) {
+    await rPop(gameObject, row, col + 1, { r: row, c: col }, setGame, info);
+  }
+
+  return gameObject.history[gameObject.currentBoard].balloonsPopped;
+}
+
+function handlePopPromise(gameObject, version, board, setGame, popCooldown) {
+  // gameObject.history[gameObject.currentBoard].points += popped * (popped + 1);
+  const balloonsPopped =
+    gameObject.history[gameObject.currentBoard].balloonsPopped;
+  gameObject.history[gameObject.currentBoard].points +=
+    balloonsPopped * (balloonsPopped + 1);
+  setGame((oldBoard) => {
+    if (version === 0) {
+      setTimeout(() => {
+        floatUp(
+          board,
+          gameObject.history[gameObject.currentBoard].rows,
+          gameObject.history[gameObject.currentBoard].cols
+        );
+        popCooldown.current = false;
+        setGame(JSON.parse(JSON.stringify(gameObject)));
+      }, 500);
+    }
+    return JSON.parse(JSON.stringify(gameObject));
+  });
+}
+async function rPop(gameObject, row, col, prevBalloon, setGame, info) {
   let board = gameObject.history[gameObject.currentBoard].board;
   if (
     outOfBounds(gameObject, row, col) ||
     outOfBounds(gameObject, prevBalloon.r, prevBalloon.c) ||
-    board[row][col].color !== board[prevBalloon.r][prevBalloon.c].color ||
+    board[row][col].color !== info.color ||
     board[row][col] === colors[4] ||
     board[row][col].popped
   ) {
-    return popped;
+    return;
   }
-  popped++;
   board[row][col].popped = true;
-  let myPromise = new Promise(function (myResolve, myReject) {
-    setTimeout(() => {
-      if (row - 1 !== prevBalloon.r) {
-        popped = rPop(
-          gameObject,
-          row - 1,
-          col,
-          { r: row, c: col },
-          popped,
-          setGame
-        );
-      }
-      if (row + 1 !== prevBalloon.r) {
-        popped = rPop(
-          gameObject,
-          row + 1,
-          col,
-          { r: row, c: col },
-          popped,
-          setGame
-        );
-      }
-      if (col - 1 !== prevBalloon.c) {
-        popped = rPop(
-          gameObject,
-          row,
-          col - 1,
-          { r: row, c: col },
-          popped,
-          setGame
-        );
-      }
-      if (col + 1 !== prevBalloon.c) {
-        popped = rPop(
-          gameObject,
-          row,
-          col + 1,
-          { r: row, c: col },
-          popped,
-          setGame
-        );
-      }
+  let version = gameObject.history[gameObject.currentBoard].balloonsPopped;
+  gameObject.history[gameObject.currentBoard].balloonsPopped++;
+
+  let myPromise = new Promise(async function (myResolve, myReject) {
+    setTimeout(async () => {
       board[row][col].color = colors[4];
-      // setGame(JSON.parse(JSON.stringify(gameObject)));
       setGame((oldBoard) => {
-        let board = JSON.parse(JSON.stringify(gameObject));
-        return JSON.parse(JSON.stringify(board));
+        return JSON.parse(JSON.stringify(gameObject));
       });
-      myResolve("done!");
+      await ExecutePop(row, prevBalloon, gameObject, setGame, col, info);
+      return myResolve(version);
     }, 250);
   });
 
-  myPromise.then((result) => {
-    // gameObject.history[gameObject.currentBoard].points += popped * (popped + 1);
-    gameObject.history.forEach((item) => {
-      console.log(item);
-    });
-    gameObject.history[gameObject.currentBoard].popped = popped;
-    gameObject.history[gameObject.currentBoard].points += popped * (popped + 1);
-    setGame((oldBoard) => {
-      let board = JSON.parse(JSON.stringify(gameObject));
-      return JSON.parse(JSON.stringify(board));
-    });
-    console.log(`popped: ${popped}`);
+  return myPromise.then((result) => {
+    handlePopPromise(gameObject, version, board, setGame, info.popCooldown);
+    return version;
   });
-  return popped;
 }
 
-export function popBalloon(gameObject, row, col, setGame) {
+export async function popBalloon(gameObject, row, col, setGame, popCooldown) {
   let board = gameObject.history[gameObject.currentBoard];
   if (
     outOfBounds(gameObject, row, col) ||
-    board.board[row][col].color === colors[4]
+    board.board[row][col].color === colors[4] ||
+    popCooldown.current
   ) {
     console.log("do not run!" + board.board[row][col].color);
     return gameObject;
   }
-
+  popCooldown.current = true;
   gameObject.history.push(JSON.parse(JSON.stringify(board)));
   gameObject.currentBoard++;
   board = gameObject.history[gameObject.currentBoard];
-  board.popped = 0;
+  board.balloonsPopped = 0;
   setGame((oldBoard) => {
     JSON.parse(JSON.stringify(gameObject));
     return JSON.parse(JSON.stringify(gameObject));
   });
-  // console.log(
-  //   `current board: \n${printMatrix(board.board, board.rows, board.cols)}`
-  // );
-  console.log(`set game: ${setGame}`);
   let balloonsPopped = 0;
-  let PoppingPromise = new Promise((Resolve, Reject) => {
-    rPop(gameObject, row, col, { r: row, c: col }, 0, setGame);
-    Resolve("finished popping!");
-  });
-  console.log(`popped: ${balloonsPopped} balloons!`);
-  // board.board = floatUp(board.board, board.rows, board.cols);
-  // console.log(
-  //   `board after: \n${printMatrix(board.board, board.rows, board.cols)}`
-  // );
-  PoppingPromise.then((resolve) => {
-    console.log("Popped in total: " + balloonsPopped);
-    board.popped = balloonsPopped;
-    // setGame((oldBoard) => {
-    //   let board = JSON.parse(JSON.stringify(gameObject));
-    //   return JSON.parse(JSON.stringify(board));
-    // });
+  let finish = await rPop(gameObject, row, col, { r: row, c: col }, setGame, {
+    color: board.board[row][col].color,
+    popCooldown: popCooldown,
   });
   return gameObject;
 }

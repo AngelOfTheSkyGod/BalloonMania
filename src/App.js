@@ -41,7 +41,8 @@ export default function App() {
         time: 30000,
         rows: 7,
         cols: 7,
-        popped: 0,
+        balloonsPopped: 0,
+        popped: false,
       },
     ],
     currentBoard: 0,
@@ -54,10 +55,11 @@ export default function App() {
     activated: true,
     clicked: "",
   });
+  const popCooldown = React.useRef(false);
   ///////////////////////////////////////////////////Single Player
   React.useEffect(() => {
     updatePoints(game.history[game.currentBoard].points, setScore);
-    updateCombo(game.history[game.currentBoard].popped, setCombo);
+    updateCombo(game.history[game.currentBoard].balloonsPopped, setCombo);
   }, [game]);
 
   return (
@@ -96,6 +98,7 @@ export default function App() {
         loadedSinglePlayer={loadedSinglePlayer}
         showSinglePlayer={showSinglePlayer}
         setShowSinglePlayer={setShowSinglePlayer}
+        popCooldown={popCooldown}
       />
     ))
   );
