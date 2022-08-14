@@ -5,7 +5,7 @@ const colors = ["^", "&", "%", "#", "*"];
 /*GAME OBJECT: 
 {
     history: [
-      { board: makeGrid([], 7, 7), points: 0, time: 30000, rows: 7, cols: 7, popped},
+      { board: makeGrid([], 7, 7), points: 0, time: 30000, rows: 7, cols: 7, popped, animating},
     ],
     currentBoard: 0,
   }
@@ -41,6 +41,7 @@ export function makeGrid(grid, rows, cols) {
         popped: false,
         row: r,
         col: c,
+        animating: false,
       };
       array.push(balloon);
     }
@@ -150,9 +151,13 @@ async function rPop(gameObject, row, col, prevBalloon, setGame, info) {
   let myPromise = new Promise(async function (myResolve, myReject) {
     setTimeout(async () => {
       board[row][col].color = colors[4];
+      board[row][col].animating = true;
       setGame((oldBoard) => {
         return JSON.parse(JSON.stringify(gameObject));
       });
+      setTimeout(() => {
+        board[row][col].animating = false;
+      }, 100);
       await ExecutePop(row, prevBalloon, gameObject, setGame, col, info);
       return myResolve(version);
     }, 250);

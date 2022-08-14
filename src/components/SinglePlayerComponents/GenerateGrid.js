@@ -1,6 +1,6 @@
 import React from "react";
 import { Icon } from "@iconify/react";
-import { GiAirBalloon } from "react-icons/gi";
+import { GiSpikyExplosion } from "react-icons/gi";
 
 import {
   makeGrid,
@@ -30,6 +30,7 @@ export default function GenerateGrid(props) {
   let rows = props.props.game.history[props.props.game.currentBoard].board.map(
     (row) => {
       let balloons = row.map((balloon) => {
+        let explode = balloon.animating;
         return (
           <div
             className="Balloon"
@@ -47,13 +48,22 @@ export default function GenerateGrid(props) {
               )
             }
           >
-            <Icon
-              icon="bi:balloon-fill"
-              style={colors[balloon.color]}
-              width="70%"
-              height="80%"
-              className="balloon-image"
-            />
+            {!explode && (
+              <Icon
+                icon="bi:balloon-fill"
+                style={colors[balloon.color]}
+                width="70%"
+                height="80%"
+                className="balloon-image"
+              />
+            )}
+            {explode && (
+              <GiSpikyExplosion
+                color="#D1F1F9"
+                className="explosion"
+                size="2rem"
+              />
+            )}
           </div>
         );
       });

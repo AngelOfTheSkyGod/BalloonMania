@@ -232,6 +232,11 @@
   border: 0.2rem solid rgba(82, 150, 165, 0.4);
 }
 
+.explosion {
+  width: 100%;
+  height: 5rem;
+  animation: explosionAnimation 0.25s ease-in forwards;
+}
 .Balloon:hover {
   /* grid-column: 1 / span 2; */
   /* grid-row: 1/2; */
@@ -270,12 +275,14 @@
   }
 }
 
-@keyframes balloon-hover {
+@keyframes explosionAnimation {
   0% {
-    transform: translateY(-3%) scaleX(-5%);
+    transform: scaleX(0%) scaleY(0%) rotate(0deg);
+    opacity: 1;
   }
   100% {
-    transform: translateY(-5%) scaleX(2%);
+    transform: scaleX(100%) scaleY(100%) rotate(90deg);
+    opacity: 0.05;
   }
 }
 @keyframes menuBalloonAnimation {
