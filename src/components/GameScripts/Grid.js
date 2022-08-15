@@ -48,7 +48,7 @@ export function makeGrid(grid, rows, cols) {
     grid.push(array);
   }
   grid = floatUp(grid, rows, cols);
-  console.log(`created matrix:\n${printMatrix(grid, rows, cols)}`);
+  //////console.log(`created matrix:\n${printMatrix(grid, rows, cols)}`);
   return grid;
 }
 
@@ -95,7 +95,7 @@ function outOfBounds(gameObject, row, col) {
 
 async function ExecutePop(row, prevBalloon, gameObject, setGame, col, info) {
   const board = gameObject.history[gameObject.currentBoard].board;
-  console.log("CALLING EXECUTE POP!");
+  ////console.log("CALLING EXECUTE POP!");
   if (row - 1 !== prevBalloon.r) {
     await rPop(gameObject, row - 1, col, { r: row, c: col }, setGame, info);
   }
@@ -117,9 +117,14 @@ function handlePopPromise(gameObject, version, board, setGame, popCooldown) {
   const balloonsPopped =
     gameObject.history[gameObject.currentBoard].balloonsPopped;
   gameObject.history[gameObject.currentBoard].points +=
-    balloonsPopped * (balloonsPopped + 1);
+    balloonsPopped * (balloonsPopped - 1);
   setGame((oldBoard) => {
     if (version === 0) {
+      gameObject.history[gameObject.currentBoard].totalPopped += balloonsPopped;
+      gameObject.history[gameObject.currentBoard].topCombo = Math.max(
+        balloonsPopped,
+        gameObject.history[gameObject.currentBoard].topCombo
+      );
       setTimeout(() => {
         floatUp(
           board,
@@ -128,7 +133,7 @@ function handlePopPromise(gameObject, version, board, setGame, popCooldown) {
         );
         popCooldown.current = false;
         setGame(JSON.parse(JSON.stringify(gameObject)));
-      }, 500);
+      }, 1000);
     }
     return JSON.parse(JSON.stringify(gameObject));
   });
@@ -176,7 +181,7 @@ export async function popBalloon(gameObject, row, col, setGame, popCooldown) {
     board.board[row][col].color === colors[4] ||
     popCooldown.current
   ) {
-    console.log("do not run!" + board.board[row][col].color);
+    //////console.log("do not run!" + board.board[row][col].color);
     return gameObject;
   }
   popCooldown.current = true;
@@ -202,7 +207,7 @@ export function revertHistory(gameObject, row, col) {
   }
   gameObject.history.pop();
   gameObject.currentBoard--;
-  // console.log(
+  // //////console.log(
   //   `rewinding history one step: \n${printMatrix(
   //     gameObject.history[gameObject.currentBoard].board,
   //     gameObject.history[gameObject.currentBoard].rows,

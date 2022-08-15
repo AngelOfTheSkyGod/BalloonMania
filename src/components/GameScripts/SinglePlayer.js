@@ -2,6 +2,8 @@ import React from "react";
 
 import DisplayStatsSP from "../SinglePlayerComponents/DisplayStatsSP";
 import GenerateGrid from "../SinglePlayerComponents/GenerateGrid";
+import GameEnd from "../SinglePlayerComponents/GameEnd";
+
 import Grid from "../GameScripts/Grid";
 
 export default function SinglePlayer(props) {
@@ -18,6 +20,7 @@ export default function SinglePlayer(props) {
     <div className="SP-Background">
       <DisplayStatsSP props={props} />
       <GenerateGrid props={props} />
+      {props.gameEnded && <GameEnd props={props} />}
     </div>
   );
 }

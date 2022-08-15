@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./components/GameScripts/Menu";
 import SinglePlayer from "./components/GameScripts/SinglePlayer";
+import Timer from "./components/GameScripts/Timer";
 
 import {
   makeGrid,
@@ -10,9 +11,24 @@ import {
 } from "./components/GameScripts/Grid";
 import style from "./style.css";
 let coordinate = { row: -1, col: -1 };
-function updatePoints(pointsGained, setScore) {
+function updatePoints(
+  pointsGained,
+  setScore,
+  setTotalPoints,
+  setHighScore,
+  newHighScore,
+  highScore
+) {
+  if (pointsGained > highScore) {
+    console.log(`should update high score!: ${pointsGained}`);
+    newHighScore.current = true;
+    setHighScore(pointsGained);
+  }
   setScore((prevScore) => {
     return pointsGained;
+  });
+  setTotalPoints((prevTotalPoints) => {
+    return prevTotalPoints + pointsGained;
   });
 }
 
@@ -21,7 +37,7 @@ function updateCombo(balloonsPopped, setCombo) {
 }
 
 export default function App() {
-  console.log("Rerendered");
+  // console.log("Rerendered");
   const [mode, setMode] = React.useState("Menu");
   const [showMenu, setShowMenu] = React.useState({
     activated: true,
@@ -29,8 +45,19 @@ export default function App() {
   });
   const [points, setPoints] = React.useState(0);
   const [score, setScore] = React.useState(0);
-  const [highScore, setHighScore] = React.useState(0);
-
+  const [highScore, setHighScore] = React.useState(
+    JSON.parse(localStorage.getItem("highScore6")) || 0
+  );
+  const [totalPoints, setTotalPoints] = React.useState(
+    JSON.parse(localStorage.getItem("totalPoints")) || 0
+  );
+  React.useEffect(() => {
+    localStorage.setItem("totalPoints", JSON.stringify(totalPoints));
+  }, [totalPoints]);
+  React.useEffect(() => {
+    localStorage.setItem("highScore6", JSON.stringify(highScore));
+    console.log(highScore + "CHANGED!");
+  }, [highScore]);
   const menuCooldown = React.useRef(false);
 
   const [game, setGame] = React.useState({
@@ -38,17 +65,19 @@ export default function App() {
       {
         board: makeGrid([], 7, 7),
         points: 0,
-        time: 30000,
+        time: 60000,
         rows: 7,
         cols: 7,
         balloonsPopped: 0,
+        topCombo: 0,
         popped: false,
+        totalPopped: 0,
       },
     ],
     currentBoard: 0,
   });
   ///////////////////////////////////////////////////Single Player
-  const [time, setTime] = React.useState(180000);
+  const [time, setTime] = React.useState(30000);
   const [combo, setCombo] = React.useState(0);
   const loadedSinglePlayer = React.useRef(false);
   const [showSinglePlayer, setShowSinglePlayer] = React.useState({
@@ -56,12 +85,36 @@ export default function App() {
     clicked: "",
   });
   const popCooldown = React.useRef(false);
+  const [gameEnded, setGameEnded] = React.useState(false);
+  const newHighScore = React.useRef(false);
   ///////////////////////////////////////////////////Single Player
   React.useEffect(() => {
-    updatePoints(game.history[game.currentBoard].points, setScore);
+    updatePoints(
+      game.history[game.currentBoard].points,
+      setScore,
+      setTotalPoints,
+      setHighScore,
+      newHighScore,
+      highScore
+    );
     updateCombo(game.history[game.currentBoard].balloonsPopped, setCombo);
   }, [game]);
 
+  React.useEffect(() => {
+    if (mode != "Single Player") {
+      return;
+    }
+    Timer({
+      time: time,
+      setTime: setTime,
+      gameEnded: gameEnded,
+      setGameEnded: setGameEnded,
+      score: score,
+      highScore: highScore,
+      newHighScore: newHighScore,
+      setHighScore: setHighScore,
+    });
+  }, [mode]);
   return (
     (mode === "Menu" && (
       <Menu
@@ -76,6 +129,8 @@ export default function App() {
         menuCooldown={menuCooldown}
         showMenu={showMenu}
         setShowMenu={setShowMenu}
+        totalPoints={totalPoints}
+        setTotalPoints={setTotalPoints}
       />
     )) ||
     (mode === "Single Player" && (
@@ -87,7 +142,7 @@ export default function App() {
         score={score}
         setScore={setScore}
         highScore={highScore}
-        sethighScore={setHighScore}
+        setHighScore={setHighScore}
         menuCooldown={menuCooldown}
         game={game}
         setGame={setGame}
@@ -99,6 +154,12 @@ export default function App() {
         showSinglePlayer={showSinglePlayer}
         setShowSinglePlayer={setShowSinglePlayer}
         popCooldown={popCooldown}
+        totalPoints={totalPoints}
+        setTotalPoints={setTotalPoints}
+        gameEnded={gameEnded}
+        setGameEnded={setGameEnded}
+        newHighScore={newHighScore}
+        setShowMenu={setShowMenu}
       />
     ))
   );
@@ -141,7 +202,6 @@ export default function App() {
       }
       console.log(`coordinate: (${coordinate.row}, ${coordinate.col})`);
     }
-    // Update the document title using the browser API
     document.addEventListener("keypress", keyListener);
 
     return () => {
@@ -150,3 +210,23 @@ export default function App() {
     };
   }, []);
 */
+
+//  time: time,
+// setTime: setTime,
+// mode: mode,
+// setMode: setMode,
+// showMenu: showMenu,
+// setShowMenu: setShowMenu,
+// points: points,
+// setPoints: setPoints,
+// score: score,
+// setScore: setScore,
+// highScore: highScore,
+// setHighScore: setHighScore,
+// menuCooldown: menuCooldown,
+// game: game,
+// setGame: setGame,
+// loadedSinglePlayer: loadedSinglePlayer,
+// showSinglePlayer: showSinglePlayer,
+// setShowSinglePlayer: setShowSinglePlayer,
+// popCooldown: popCooldown,

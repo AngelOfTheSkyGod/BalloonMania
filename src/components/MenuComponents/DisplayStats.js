@@ -8,7 +8,7 @@ export default function DisplayStats(props) {
       <ul className="display-navbar">
         <li className="display-container">
           <GiDart size="3rem" color="#ADE8F4" stroke="black" strokeWidth="5" />
-          <h1 className="display-title">Points: {props.props.points}</h1>
+          <h1 className="display-title">Points: {props.props.totalPoints}</h1>
         </li>
         <li className="display-container">
           <GiFallingStar

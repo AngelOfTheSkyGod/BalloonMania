@@ -26,7 +26,7 @@ export default function DisplayStatsSP(props) {
     >
       <MakeListSection
         title={"Time left"}
-        data={`${props.props.time / 1000} seconds`}
+        data={`${(props.props.time / 30000) * 30} seconds`}
       />
       <MakeListSection title={"Score"} data={`${props.props.score} points`} />
       <MakeListSection title={"Combo"} data={`${props.props.combo} balloons`} />

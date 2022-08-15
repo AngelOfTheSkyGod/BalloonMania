@@ -22,11 +22,11 @@ function onClick(row, column, game, setGame, popCooldown) {
   if (popCooldown.current) {
     return;
   }
-  console.log(`popped: (${row}, ${column})`);
+  ////console.log(`popped: (${row}, ${column})`);
   popBalloon(game, row, column, setGame, popCooldown);
 }
 export default function GenerateGrid(props) {
-  console.log("current version: ", props.props.game.currentBoard);
+  // //console.log("current version: ", props.props.game.currentBoard);
   let rows = props.props.game.history[props.props.game.currentBoard].board.map(
     (row) => {
       let balloons = row.map((balloon) => {
