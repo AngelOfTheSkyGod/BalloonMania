@@ -2,7 +2,7 @@ import React from "react";
 import MenuItems from "../MenuComponents/MenuItems";
 import { GiAirBalloon } from "react-icons/gi";
 import Animation from "../Animations/Animation";
-
+import Audio from "./Audio";
 export default function Menu(props) {
   console.log(props);
   const page = (
