@@ -1,6 +1,7 @@
 import React from "react";
 import Menu from "./components/GameScripts/Menu";
 import SinglePlayer from "./components/GameScripts/SinglePlayer";
+import Shop from "./components/GameScripts/Shop";
 import Timer from "./components/GameScripts/Timer";
 
 import {
@@ -51,13 +52,6 @@ export default function App() {
   const [totalPoints, setTotalPoints] = React.useState(
     JSON.parse(localStorage.getItem("totalPoints")) || 0
   );
-  React.useEffect(() => {
-    localStorage.setItem("totalPoints", JSON.stringify(totalPoints));
-  }, [totalPoints]);
-  React.useEffect(() => {
-    localStorage.setItem("highScore6", JSON.stringify(highScore));
-    console.log(highScore + "CHANGED!");
-  }, [highScore]);
   const menuCooldown = React.useRef(false);
 
   const [game, setGame] = React.useState({
@@ -87,7 +81,25 @@ export default function App() {
   const popCooldown = React.useRef(false);
   const [gameEnded, setGameEnded] = React.useState(false);
   const newHighScore = React.useRef(false);
+
   ///////////////////////////////////////////////////Single Player
+  ///////////////////////////////////////////////////Shop
+  let [currentItem, setCurrentItem] = React.useState("");
+  const [background, setBackground] = React.useState(
+    JSON.parse(localStorage.getItem("background")) || {
+      currentBackground: "https://wallpaperaccess.com/full/8132764.jpg",
+      backgrounds: [
+        {
+          key: "0",
+          name: "Default Sky",
+          tag: "Background",
+          price: 0,
+          link: "https://wallpaperaccess.com/full/8132764.jpg",
+        },
+      ],
+    }
+  );
+  ///////////////////////////////////////////////////Shop
   React.useEffect(() => {
     updatePoints(
       game.history[game.currentBoard].points,
@@ -115,6 +127,13 @@ export default function App() {
       setHighScore: setHighScore,
     });
   }, [mode]);
+
+  React.useEffect(() => {
+    localStorage.setItem("totalPoints", JSON.stringify(totalPoints));
+    localStorage.setItem("highScore6", JSON.stringify(highScore));
+    localStorage.setItem("background", JSON.stringify(background));
+  }, [totalPoints, highScore, background]);
+
   return (
     (mode === "Menu" && (
       <Menu
@@ -160,6 +179,41 @@ export default function App() {
         setGameEnded={setGameEnded}
         newHighScore={newHighScore}
         setShowMenu={setShowMenu}
+        background={background}
+        setBackground={setBackground}
+      />
+    )) ||
+    (mode === "Shop" && (
+      <Shop
+        mode={mode}
+        setMode={setMode}
+        points={points}
+        setPoints={setPoints}
+        score={score}
+        setScore={setScore}
+        highScore={highScore}
+        setHighScore={setHighScore}
+        menuCooldown={menuCooldown}
+        game={game}
+        setGame={setGame}
+        time={time}
+        setTime={setTime}
+        combo={combo}
+        setCombo={setCombo}
+        loadedSinglePlayer={loadedSinglePlayer}
+        showSinglePlayer={showSinglePlayer}
+        setShowSinglePlayer={setShowSinglePlayer}
+        popCooldown={popCooldown}
+        totalPoints={totalPoints}
+        setTotalPoints={setTotalPoints}
+        gameEnded={gameEnded}
+        setGameEnded={setGameEnded}
+        newHighScore={newHighScore}
+        setShowMenu={setShowMenu}
+        background={background}
+        setBackground={setBackground}
+        currentItem={currentItem}
+        setCurrentItem={setCurrentItem}
       />
     ))
   );

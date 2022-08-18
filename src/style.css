@@ -323,6 +323,106 @@
   padding-bottom: 50%;
 }
 
+.shop-background {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.shop-grid {
+  display: grid;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  /* background-color: #003f7a; */
+  height: 75vh;
+  width: 50%;
+  grid-template-columns: repeat(4, 0.25fr);
+  border-radius: 1%;
+  border: 0.4rem solid rgba(82, 150, 165, 0.4);
+  overflow: auto;
+}
+
+.shopcard-background {
+  width: 80%;
+  height: 75%;
+  /* background-color: black; */
+  max-width: 80%;
+  max-height: 75%;
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  border: 0.6rem solid #003f7a;
+  border-style: solid;
+  border-radius: 5%;
+}
+.shop-foreground {
+  background-color: #003f7a;
+  width: 100%;
+  height: 70%;
+}
+.shop-display {
+  /* object-fit: cover; */
+  height: 100%;
+  width: 100%;
+}
+.price-display {
+  position: relative;
+  /* top: -15%; */
+  font-size: 1.2rem;
+  text-align: center;
+  font-family: "Bubblegum Sans", cursive;
+  /* white-space: nowrap; */
+  color: #0088ff;
+  text-decoration: underline;
+}
+.item-type {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #0088ff;
+}
+
+.shop-title {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #0088ff;
+}
+.confirm-buy-background {
+  position: relative;
+  /* top: 20%; */
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10%;
+  background-color: #003f7a;
+  z-index: 5;
+  border: 0.4rem solid rgba(82, 150, 165, 0.4);
+}
+
+.choice-background {
+  list-style-type: none;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+  gap: 5rem;
+}
+.end-return2 {
+  width: 5%;
+  left: 5%;
+}
 /* DEVICE RESPONSIVE MANAGER */
 /* even smaller phones */
 @media only screen and (max-width: 359px) {
