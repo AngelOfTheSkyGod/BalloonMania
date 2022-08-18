@@ -1,5 +1,5 @@
 import { FaSoundcloud } from "react-icons/fa";
-import Audio from "./Audio";
+import Audios from "./Audios";
 /*
 the balloons are 5 colors. air is empty.
 */
@@ -152,8 +152,6 @@ async function rPop(gameObject, row, col, prevBalloon, setGame, info) {
     return;
   }
 
-  let popSound = new Audio(Audio[0]);
-  popSound.play();
   board[row][col].popped = true;
   let version = gameObject.history[gameObject.currentBoard].balloonsPopped;
   gameObject.history[gameObject.currentBoard].balloonsPopped++;
@@ -162,6 +160,8 @@ async function rPop(gameObject, row, col, prevBalloon, setGame, info) {
     setTimeout(async () => {
       board[row][col].color = colors[4];
       board[row][col].animating = true;
+      let popSound = new Audio(Audios[0]);
+      popSound.play();
       setGame((oldBoard) => {
         return JSON.parse(JSON.stringify(gameObject));
       });
