@@ -423,6 +423,51 @@
   width: 5%;
   left: 5%;
 }
+
+.BACKGROUND-SETTINGS {
+  display: flex;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  flex-direction: column;
+  /* background-color: #003f7a; */
+  height: 100vh;
+  width: 100%;
+}
+
+.settings-background {
+  display: flex;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  /* background-color: #003f7a; */
+  height: 75vh;
+  width: 50%;
+  grid-template-columns: repeat(4, 0.25fr);
+  border-radius: 1%;
+  border: 0.4rem solid rgba(82, 150, 165, 0.4);
+  overflow: auto;
+}
+
+.background-settings-background {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  justify-items: center;
+  align-items: center;
+  list-style-type: none;
+  gap: 40%;
+}
+
+.background-settings-title {
+  position: relative;
+  text-align: center;
+  font-size: 1.5rem;
+  font-family: "Bubblegum Sans", cursive;
+  white-space: nowrap;
+  text-decoration: underline;
+  color: #0088ff;
+}
 /* DEVICE RESPONSIVE MANAGER */
 /* even smaller phones */
 @media only screen and (max-width: 359px) {

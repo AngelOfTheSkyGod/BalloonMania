@@ -3,7 +3,7 @@ import Menu from "./components/GameScripts/Menu";
 import SinglePlayer from "./components/GameScripts/SinglePlayer";
 import Shop from "./components/GameScripts/Shop";
 import Timer from "./components/GameScripts/Timer";
-
+import Settings from "./components/GameScripts/Settings";
 import {
   makeGrid,
   floatUp,
@@ -86,8 +86,9 @@ export default function App() {
   ///////////////////////////////////////////////////Shop
   let [currentItem, setCurrentItem] = React.useState("");
   const [background, setBackground] = React.useState(
-    JSON.parse(localStorage.getItem("background")) || {
+    JSON.parse(localStorage.getItem("background2")) || {
       currentBackground: "https://wallpaperaccess.com/full/8132764.jpg",
+      index: 0,
       backgrounds: [
         {
           key: "0",
@@ -131,7 +132,7 @@ export default function App() {
   React.useEffect(() => {
     localStorage.setItem("totalPoints", JSON.stringify(totalPoints));
     localStorage.setItem("highScore6", JSON.stringify(highScore));
-    localStorage.setItem("background", JSON.stringify(background));
+    localStorage.setItem("background2", JSON.stringify(background));
   }, [totalPoints, highScore, background]);
 
   return (
@@ -185,6 +186,39 @@ export default function App() {
     )) ||
     (mode === "Shop" && (
       <Shop
+        mode={mode}
+        setMode={setMode}
+        points={points}
+        setPoints={setPoints}
+        score={score}
+        setScore={setScore}
+        highScore={highScore}
+        setHighScore={setHighScore}
+        menuCooldown={menuCooldown}
+        game={game}
+        setGame={setGame}
+        time={time}
+        setTime={setTime}
+        combo={combo}
+        setCombo={setCombo}
+        loadedSinglePlayer={loadedSinglePlayer}
+        showSinglePlayer={showSinglePlayer}
+        setShowSinglePlayer={setShowSinglePlayer}
+        popCooldown={popCooldown}
+        totalPoints={totalPoints}
+        setTotalPoints={setTotalPoints}
+        gameEnded={gameEnded}
+        setGameEnded={setGameEnded}
+        newHighScore={newHighScore}
+        setShowMenu={setShowMenu}
+        background={background}
+        setBackground={setBackground}
+        currentItem={currentItem}
+        setCurrentItem={setCurrentItem}
+      />
+    )) ||
+    (mode === "Settings" && (
+      <Settings
         mode={mode}
         setMode={setMode}
         points={points}

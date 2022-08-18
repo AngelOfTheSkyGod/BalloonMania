@@ -10,7 +10,9 @@ export default function SinglePlayer(props) {
   React.useEffect(() => {
     console.log("updated background image.");
     document.body.style.backgroundColor = "#000000";
-    document.body.style.backgroundImage = `url(${props.background.currentBackground})`;
+    document.body.style.backgroundImage = `url(${
+      props.background.backgrounds[props.background.index].link
+    })`;
     document.body.style.backgroundRepeat = "no-repeat";
     document.body.style.backgroundSize = "cover";
   }, []);
