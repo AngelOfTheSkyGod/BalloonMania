@@ -119,7 +119,7 @@ function handlePopPromise(gameObject, version, board, setGame, popCooldown) {
   const balloonsPopped =
     gameObject.history[gameObject.currentBoard].balloonsPopped;
   gameObject.history[gameObject.currentBoard].points +=
-    balloonsPopped * (balloonsPopped - 1);
+    balloonsPopped * (balloonsPopped - 1) + 10;
   setGame((oldBoard) => {
     if (version === 0) {
       gameObject.history[gameObject.currentBoard].totalPopped += balloonsPopped;

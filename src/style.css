@@ -555,7 +555,27 @@
 /* PHONE SCREENS */
 @media only screen and (min-width: 375px) and (max-width: 820px) {
   :root {
-    font-size: 1.2vh;
+    font-size: 0.6vh;
+  }
+  .menu-container {
+    height: 50vh;
+    width: 100%;
+    top: 20vh;
+  }
+  .display-navbar {
+    gap: 0%;
+  }
+  .selection-navbar {
+    gap: 10rem;
+  }
+  .balloon-board {
+    height: 50vh;
+    width: 100%;
+  }
+
+  .shop-grid {
+    height: 50vh;
+    width: 100%;
   }
 }
 /* LAPTOP SCREENS */
