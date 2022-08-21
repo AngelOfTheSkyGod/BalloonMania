@@ -47,6 +47,14 @@ function Reset(props) {
 export default function Settings(props) {
   return (
     <div className="BACKGROUND-SETTINGS">
+      <audio
+        id="audio"
+        src={require("./audio/cominghome.mp3")}
+        autoPlay="true"
+        loop
+      >
+        {}
+      </audio>
       <ul className="settings-background">
         <ul className="background-settings-background">
           <h1 className="background-settings-title ">

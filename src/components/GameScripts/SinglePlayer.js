@@ -21,6 +21,14 @@ export default function SinglePlayer(props) {
     <div className="SP-Background">
       <DisplayStatsSP props={props} />
       <GenerateGrid props={props} />
+      <audio
+        id="audio"
+        src={require("./audio/escalon.mp3")}
+        autoPlay="true"
+        loop
+      >
+        {}
+      </audio>
       {props.gameEnded && <GameEnd props={props} />}
     </div>
   );

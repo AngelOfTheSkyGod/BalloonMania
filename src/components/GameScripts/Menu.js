@@ -10,6 +10,14 @@ export default function Menu(props) {
       className="menu-container"
       style={props.showMenu.activated === false ? Animation[1] : {}}
     >
+      <audio
+        id="audio"
+        src={require("./audio/mothersea.mp3")}
+        autoPlay="true"
+        loop
+      >
+        {}
+      </audio>
       <div className="menu-background">
         <GiAirBalloon
           className="menu-balloon"

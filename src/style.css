@@ -125,7 +125,8 @@
 .selection-container:hover {
   border-radius: 5%;
   background-color: #48cae4;
-  left: 0%;
+  /* left: 0%; */
+  transform: scaleX(1.1);
 }
 .menu-button {
   background: transparent;

@@ -112,7 +112,6 @@ export default function App() {
     );
     updateCombo(game.history[game.currentBoard].balloonsPopped, setCombo);
   }, [game]);
-
   React.useEffect(() => {
     if (mode != "Single Player") {
       return;

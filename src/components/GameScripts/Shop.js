@@ -29,6 +29,14 @@ export default function Shop(props) {
   });
   return (
     <div className="shop-background">
+      <audio
+        id="audio"
+        src={require("./audio/heretostay.mp3")}
+        autoPlay="true"
+        loop
+      >
+        {}
+      </audio>
       <DisplayStats props={props} />
       <div className="shop-grid">{items}</div>
       <div className="end-return2">
