@@ -469,37 +469,6 @@
   text-decoration: underline;
   color: #0088ff;
 }
-/* DEVICE RESPONSIVE MANAGER */
-/* even smaller phones */
-@media only screen and (max-width: 359px) {
-  :root {
-    font-size: 1.2vh;
-  }
-}
-/* smaller phones? */
-@media only screen and (min-width: 360px) and (max-width: 375px) {
-  :root {
-    font-size: 1.3vh;
-  }
-}
-/* PHONE SCREENS */
-@media only screen and (min-width: 375px) and (max-width: 820px) {
-  :root {
-    font-size: 1.43vh;
-  }
-}
-/* LAPTOP SCREENS */
-@media only screen and (min-width: 820px) and (max-width: 1500px) {
-  :root {
-    font-size: 2vh;
-  }
-}
-/* BIG DESKTOPS */
-@media only screen and (min-width: 1500px) {
-  :root {
-    font-size: 1.5vh;
-  }
-}
 
 @keyframes resetAnimation {
   0% {
@@ -567,5 +536,37 @@
   }
   100% {
     transform: translateX(0%) translateY(0%);
+  }
+}
+
+/* DEVICE RESPONSIVE MANAGER */
+/* even smaller phones */
+@media only screen and (max-width: 359px) {
+  :root {
+    font-size: 1vh;
+  }
+}
+/* smaller phones? */
+@media only screen and (min-width: 360px) and (max-width: 375px) {
+  :root {
+    font-size: 1.1vh;
+  }
+}
+/* PHONE SCREENS */
+@media only screen and (min-width: 375px) and (max-width: 820px) {
+  :root {
+    font-size: 1.2vh;
+  }
+}
+/* LAPTOP SCREENS */
+@media only screen and (min-width: 820px) and (max-width: 1500px) {
+  :root {
+    font-size: 1.5vh;
+  }
+}
+/* BIG DESKTOPS */
+@media only screen and (min-width: 1500px) {
+  :root {
+    font-size: 1.5vh;
   }
 }
