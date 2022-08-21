@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/static/css/main.373f3467.css",
-    "main.js": "/static/js/main.c8152dc4.js",
-    "static/media/escalon.mp3": "/static/media/escalon.3881ed3436cdcef27706.mp3",
-    "static/media/mothersea.mp3": "/static/media/mothersea.48b107f58478fd6a8d1f.mp3",
-    "static/media/heretostay.mp3": "/static/media/heretostay.e6ed7635e1890d040ce9.mp3",
-    "static/media/cominghome.mp3": "/static/media/cominghome.045e41d8470960462b16.mp3",
-    "index.html": "/index.html",
-    "main.373f3467.css.map": "/static/css/main.373f3467.css.map",
-    "main.c8152dc4.js.map": "/static/js/main.c8152dc4.js.map"
+    "main.css": "/BalloonMania/static/css/main.373f3467.css",
+    "main.js": "/BalloonMania/static/js/main.67d14868.js",
+    "static/media/escalon.mp3": "/BalloonMania/static/media/escalon.3881ed3436cdcef27706.mp3",
+    "static/media/mothersea.mp3": "/BalloonMania/static/media/mothersea.48b107f58478fd6a8d1f.mp3",
+    "static/media/heretostay.mp3": "/BalloonMania/static/media/heretostay.e6ed7635e1890d040ce9.mp3",
+    "static/media/cominghome.mp3": "/BalloonMania/static/media/cominghome.045e41d8470960462b16.mp3",
+    "index.html": "/BalloonMania/index.html",
+    "main.373f3467.css.map": "/BalloonMania/static/css/main.373f3467.css.map",
+    "main.67d14868.js.map": "/BalloonMania/static/js/main.67d14868.js.map"
   },
   "entrypoints": [
     "static/css/main.373f3467.css",
-    "static/js/main.c8152dc4.js"
+    "static/js/main.67d14868.js"
   ]
 }
