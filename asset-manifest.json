@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/BalloonMania/static/css/main.52d44d2e.css",
-    "main.js": "/BalloonMania/static/js/main.a4393a80.js",
+    "main.css": "/BalloonMania/static/css/main.b62594ef.css",
+    "main.js": "/BalloonMania/static/js/main.a7ee8caa.js",
     "static/media/escalon.mp3": "/BalloonMania/static/media/escalon.3881ed3436cdcef27706.mp3",
     "static/media/mothersea.mp3": "/BalloonMania/static/media/mothersea.48b107f58478fd6a8d1f.mp3",
     "static/media/heretostay.mp3": "/BalloonMania/static/media/heretostay.e6ed7635e1890d040ce9.mp3",
     "static/media/cominghome.mp3": "/BalloonMania/static/media/cominghome.045e41d8470960462b16.mp3",
     "index.html": "/BalloonMania/index.html",
-    "main.52d44d2e.css.map": "/BalloonMania/static/css/main.52d44d2e.css.map",
-    "main.a4393a80.js.map": "/BalloonMania/static/js/main.a4393a80.js.map"
+    "main.b62594ef.css.map": "/BalloonMania/static/css/main.b62594ef.css.map",
+    "main.a7ee8caa.js.map": "/BalloonMania/static/js/main.a7ee8caa.js.map"
   },
   "entrypoints": [
-    "static/css/main.52d44d2e.css",
-    "static/js/main.a4393a80.js"
+    "static/css/main.b62594ef.css",
+    "static/js/main.a7ee8caa.js"
   ]
 }
