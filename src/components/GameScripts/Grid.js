@@ -179,7 +179,14 @@ async function rPop(gameObject, row, col, prevBalloon, setGame, info) {
   });
 }
 
-export async function popBalloon(gameObject, row, col, setGame, popCooldown) {
+export async function popBalloon(
+  gameObject,
+  row,
+  col,
+  setGame,
+  popCooldown,
+  time
+) {
   let board = gameObject.history[gameObject.currentBoard];
   if (
     outOfBounds(gameObject, row, col) ||
@@ -192,7 +199,9 @@ export async function popBalloon(gameObject, row, col, setGame, popCooldown) {
   popCooldown.current = true;
   gameObject.history.push(JSON.parse(JSON.stringify(board)));
   gameObject.currentBoard++;
+  console.log("board: " + gameObject.currentBoard);
   board = gameObject.history[gameObject.currentBoard];
+  board.time = time;
   board.balloonsPopped = 0;
   setGame((oldBoard) => {
     JSON.parse(JSON.stringify(gameObject));
@@ -205,13 +214,19 @@ export async function popBalloon(gameObject, row, col, setGame, popCooldown) {
   });
   return gameObject;
 }
-
-export function revertHistory(gameObject, row, col) {
+// /game, setGame, setTime, syncTime
+export function revertHistory(gameObject, setGame, setTime, syncTime) {
   if (gameObject.currentBoard <= 0) {
+    console.log("NO BOARDS TO REWIND!");
     return null;
   }
+  console.log(`boards: ${gameObject.currentBoard}`);
   gameObject.history.pop();
   gameObject.currentBoard--;
+  syncTime.current = gameObject.history[gameObject.currentBoard].time;
+  setGame((oldBoard) => {
+    return JSON.parse(JSON.stringify(gameObject));
+  });
   // //////console.log(
   //   `rewinding history one step: \n${printMatrix(
   //     gameObject.history[gameObject.currentBoard].board,

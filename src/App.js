@@ -59,7 +59,7 @@ export default function App() {
       {
         board: makeGrid([], 7, 7),
         points: 0,
-        time: 60000,
+        time: 30000,
         rows: 7,
         cols: 7,
         balloonsPopped: 0,
@@ -72,6 +72,7 @@ export default function App() {
   });
   ///////////////////////////////////////////////////Single Player
   const [time, setTime] = React.useState(30000);
+  const syncTime = React.useRef(30000);
   const [combo, setCombo] = React.useState(0);
   const loadedSinglePlayer = React.useRef(false);
   const [showSinglePlayer, setShowSinglePlayer] = React.useState({
@@ -125,6 +126,7 @@ export default function App() {
       highScore: highScore,
       newHighScore: newHighScore,
       setHighScore: setHighScore,
+      syncTime: syncTime,
     });
   }, [mode]);
 
@@ -133,6 +135,44 @@ export default function App() {
     localStorage.setItem("highScore6", JSON.stringify(highScore));
     localStorage.setItem("background2", JSON.stringify(background));
   }, [totalPoints, highScore, background]);
+  //TOY PROGRAM FOR TESTING GRID.JS
+  // (gameObject, row, col)
+  React.useEffect(() => {
+    function keyListener(event) {
+      if (!isNaN(event.key) && coordinate.col === -1) {
+        if (coordinate.row === -1) {
+          coordinate.row = event.key;
+        } else {
+          coordinate.col = event.key;
+        }
+      } else if (event.key === "Enter" || coordinate.col !== -1) {
+        setGame((oldBoard) => {
+          let board = popBalloon(
+            game,
+            parseInt(coordinate.row),
+            parseInt(coordinate.col)
+          );
+          if (board != null) {
+            return board;
+          }
+          return oldBoard;
+        });
+
+        coordinate.row = -1;
+        coordinate.col = -1;
+      } else if (event.key.toLowerCase() === "z") {
+        console.log("pressed Z key!");
+        revertHistory(game, setGame, setTime, syncTime);
+      }
+      console.log(`coordinate: (${coordinate.row}, ${coordinate.col})`);
+    }
+    document.addEventListener("keypress", keyListener);
+
+    return () => {
+      console.log("deleted event.");
+      document.removeEventListener("keypress", keyListener);
+    };
+  }, []);
 
   return (
     (mode === "Menu" && (
@@ -181,6 +221,7 @@ export default function App() {
         setShowMenu={setShowMenu}
         background={background}
         setBackground={setBackground}
+        syncTime={syncTime}
       />
     )) ||
     (mode === "Shop" && (
@@ -251,52 +292,6 @@ export default function App() {
     ))
   );
 }
-
-//TOY PROGRAM FOR TESTING GRID.JS
-/*
- // (gameObject, row, col)
-  React.useEffect(() => {
-    function keyListener(event) {
-      if (!isNaN(event.key) && coordinate.col === -1) {
-        if (coordinate.row === -1) {
-          coordinate.row = event.key;
-        } else {
-          coordinate.col = event.key;
-        }
-      } else if (event.key === "Enter" || coordinate.col !== -1) {
-        setGame((oldBoard) => {
-          let board = popBalloon(
-            game,
-            parseInt(coordinate.row),
-            parseInt(coordinate.col)
-          );
-          if (board != null) {
-            return board;
-          }
-          return oldBoard;
-        });
-
-        coordinate.row = -1;
-        coordinate.col = -1;
-      } else if (event.key.toLowerCase() === "z") {
-        setGame((oldBoard) => {
-          let board = revertHistory(game);
-          if (board != null) {
-            return board;
-          }
-          return oldBoard;
-        });
-      }
-      console.log(`coordinate: (${coordinate.row}, ${coordinate.col})`);
-    }
-    document.addEventListener("keypress", keyListener);
-
-    return () => {
-      console.log("deleted event.");
-      document.removeEventListener("keypress", keyListener);
-    };
-  }, []);
-*/
 
 //  time: time,
 // setTime: setTime,

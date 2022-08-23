@@ -14,7 +14,7 @@ function Reset(props) {
       {
         board: makeGrid([], 7, 7),
         points: 0,
-        time: 60000,
+        time: 30000,
         rows: 7,
         cols: 7,
         balloonsPopped: 0,
@@ -37,6 +37,7 @@ function Reset(props) {
   props.props.newHighScore.current = false;
   document.body.style.backgroundImage = "";
   document.body.style.backgroundColor = "#a2d2ff";
+  props.props.syncTime.current = 30000;
 }
 
 export default function GameEnd(props) {

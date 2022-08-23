@@ -5,11 +5,11 @@ export default function Timer(props) {
   }
   // console.log(`time: ${props.time}`);
   setTimeout(() => {
-    props.setTime(props.time - 1000);
-
+    props.syncTime.current -= 1000;
+    props.setTime(props.syncTime.current);
     Timer({
       ...props,
-      time: props.time - 1000,
+      time: props.syncTime.current,
       setTime: props.setTime,
     });
   }, 1000);
