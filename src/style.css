@@ -320,7 +320,7 @@
 .balloon-image:hover {
   /* grid-column: 1 / span 2; */
   /* grid-row: 1/2; */
-  transform: scaleX(150%) scaleY(150%);
+  animation: BalloonAnimation 0.25s ease-in forwards;
 }
 
 .shop-background {
@@ -489,7 +489,14 @@
     transform: scaleX(50%) scaleY(50%);
   }
 }
-
+@keyframes BalloonAnimation {
+  0% {
+    transform: scaleX(100%) scaleY(100%);
+  }
+  100% {
+    transform: scaleX(150%) scaleY(150%);
+  }
+}
 @keyframes rotateAnimation {
   0% {
     transform: rotateZ(0deg);
