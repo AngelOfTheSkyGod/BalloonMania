@@ -203,12 +203,8 @@ export async function popBalloon(
   board = gameObject.history[gameObject.currentBoard];
   board.time = time;
   board.balloonsPopped = 0;
-  setGame((oldBoard) => {
-    JSON.parse(JSON.stringify(gameObject));
-    return JSON.parse(JSON.stringify(gameObject));
-  });
   let balloonsPopped = 0;
-  let finish = await rPop(gameObject, row, col, { r: row, c: col }, setGame, {
+  rPop(gameObject, row, col, { r: row, c: col }, setGame, {
     color: board.board[row][col].color,
     popCooldown: popCooldown,
   });

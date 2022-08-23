@@ -135,44 +135,6 @@ export default function App() {
     localStorage.setItem("highScore6", JSON.stringify(highScore));
     localStorage.setItem("background2", JSON.stringify(background));
   }, [totalPoints, highScore, background]);
-  //TOY PROGRAM FOR TESTING GRID.JS
-  // (gameObject, row, col)
-  React.useEffect(() => {
-    function keyListener(event) {
-      if (!isNaN(event.key) && coordinate.col === -1) {
-        if (coordinate.row === -1) {
-          coordinate.row = event.key;
-        } else {
-          coordinate.col = event.key;
-        }
-      } else if (event.key === "Enter" || coordinate.col !== -1) {
-        setGame((oldBoard) => {
-          let board = popBalloon(
-            game,
-            parseInt(coordinate.row),
-            parseInt(coordinate.col)
-          );
-          if (board != null) {
-            return board;
-          }
-          return oldBoard;
-        });
-
-        coordinate.row = -1;
-        coordinate.col = -1;
-      } else if (event.key.toLowerCase() === "z") {
-        console.log("pressed Z key!");
-        revertHistory(game, setGame, setTime, syncTime);
-      }
-      console.log(`coordinate: (${coordinate.row}, ${coordinate.col})`);
-    }
-    document.addEventListener("keypress", keyListener);
-
-    return () => {
-      console.log("deleted event.");
-      document.removeEventListener("keypress", keyListener);
-    };
-  }, []);
 
   return (
     (mode === "Menu" && (
@@ -312,3 +274,42 @@ export default function App() {
 // showSinglePlayer: showSinglePlayer,
 // setShowSinglePlayer: setShowSinglePlayer,
 // popCooldown: popCooldown,
+
+// //TOY PROGRAM FOR TESTING GRID.JS
+//   // (gameObject, row, col)
+//   React.useEffect(() => {
+//     function keyListener(event) {
+//       if (!isNaN(event.key) && coordinate.col === -1) {
+//         if (coordinate.row === -1) {
+//           coordinate.row = event.key;
+//         } else {
+//           coordinate.col = event.key;
+//         }
+//       } else if (event.key === "Enter" || coordinate.col !== -1) {
+//         setGame((oldBoard) => {
+//           let board = popBalloon(
+//             game,
+//             parseInt(coordinate.row),
+//             parseInt(coordinate.col)
+//           );
+//           if (board != null) {
+//             return board;
+//           }
+//           return oldBoard;
+//         });
+
+//         coordinate.row = -1;
+//         coordinate.col = -1;
+//       } else if (event.key.toLowerCase() === "z") {
+//         console.log("pressed Z key!" + game.history);
+//         revertHistory(game, setGame, setTime, syncTime);
+//       }
+//       console.log(`coordinate: (${coordinate.row}, ${coordinate.col})`);
+//     }
+//     document.addEventListener("keypress", keyListener);
+
+//     return () => {
+//       console.log("deleted event.");
+//       document.removeEventListener("keypress", keyListener);
+//     };
+//   }, [game]);
