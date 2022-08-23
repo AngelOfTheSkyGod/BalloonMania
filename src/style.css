@@ -317,11 +317,10 @@
   text-decoration: underline;
   color: #0077b6;
 }
-.Balloon:hover {
+.balloon-image:hover {
   /* grid-column: 1 / span 2; */
   /* grid-row: 1/2; */
-  padding-left: 20%;
-  padding-bottom: 50%;
+  transform: scaleX(200%);
 }
 
 .shop-background {
