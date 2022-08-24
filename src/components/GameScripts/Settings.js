@@ -80,6 +80,8 @@ export default function Settings(props) {
             />
           </li>
         </ul>
+        
+        <h1>Mute: </h1>
       </ul>
       <div className="end-return2">
         <Icon

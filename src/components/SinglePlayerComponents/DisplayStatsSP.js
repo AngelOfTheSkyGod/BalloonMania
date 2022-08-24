@@ -1,5 +1,12 @@
 import { GiBalloons } from "react-icons/gi";
 
+import { revertHistory } from "../GameScripts/Grid";
+
+import { FaRedoAlt } from "react-icons/fa";
+
+function rewindGridOneStep(props) {
+  revertHistory(props.game, props.setGame, props.setTime, props.syncTime);
+}
 function MakeListSection({ title, data }) {
   return (
     <li className="points-container">
@@ -30,6 +37,26 @@ export default function DisplayStatsSP(props) {
       />
       <MakeListSection title={"Score"} data={`${props.props.score} points`} />
       <MakeListSection title={"Combo"} data={`${props.props.combo} balloons`} />
+      <li className="points-container">
+        <div className="redo-background">
+          <FaRedoAlt
+            onClick={() => {
+              rewindGridOneStep({
+                game: props.props.game,
+                setGame: props.props.setGame,
+                setTime: props.props.setTime,
+                syncTime: props.props.syncTime,
+              });
+            }}
+            color="#0088ff"
+            size="5rem"
+            className="redo-icon"
+          />
+          <h1 className="background-settings-title">
+            Boards: {props.props.game.currentBoard}
+          </h1>
+        </div>
+      </li>
     </ul>
   );
 }
